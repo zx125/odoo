@@ -1,0 +1,66 @@
+<odoo>
+    <data>
+        <!--动作-->
+        <record model="ir.actions.act_window" id="bug-manage_action_window">
+            <field name="name">bug-manage window</field>
+            <field name="res_model">bm.bug</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<!--        <record id="action_todo_task" model="ir.actions.act_window">-->
+<!--            <field name="name">待办事项</field>-->
+<!--            <field name="res_model">todo.task</field>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">tree,form</field>-->
+<!--            <field name="target">current</field>-->
+<!--            <field name="limit">2</field>-->
+<!--        </record>-->
+        <!--    侧边栏菜单-->
+        <menuitem name="bug管理系统" id="bug-manage_menu_root"/>
+        <menuitem name="bug管 理" id="bug-manage_menu_1" parent="bug-manage_menu_root"/>
+        <menuitem name="bug列表" id="bug-manage_menu_1_list" parent="bug-manage_menu_1"
+                  action="bug-manage_action_window"/>
+
+        <record model="ir.ui.view" id="bug-manage_list">
+            <field name="name">bug列表</field>
+            <field name="model">bm.bug</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"></field>
+                    <field name="is_closed"></field>
+                    <field name="user_id"></field>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bug-manage_form">
+            <field name="name">bug表单</field>
+            <field name="model">bm.bug</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="do_close" type="object" string="关闭bug"></button>
+                    </header>
+                    <sheet>
+                        <group name="group_top" col="2">
+                            <group name="group_left">
+                                <field name="name"></field>
+                                <field name="user_id"></field>
+                                <field name="is_closed"></field>
+                            </group>
+                            <group name="group_right">
+                                <field name="close_reason"></field>
+                                <field name="follower_id"></field>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="详细内容">
+                                <field name="detail"></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

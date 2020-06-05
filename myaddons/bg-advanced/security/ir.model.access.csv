@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_bug_manage_bug_manage1,bug管理系统,model_bm_bug_stage,,1,1,1,1
+access_bug_manage_bug_manage2,bug管理系统,model_bm_bug_tag,,1,1,1,1

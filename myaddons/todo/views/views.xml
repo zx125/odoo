@@ -1,0 +1,84 @@
+<odoo>
+    <data>
+        <record id="todo_task_view_tree" model="ir.ui.view">
+            <field name="name">todo.task.view_tree</field>
+            <field name="model">todo.task</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Todo" decoration-danger="is_expired">
+                    <field name="name"/>
+                    <field name="is_done"/>
+                    <field name="priority"/>
+                    <field name="deadline"/>
+                    <field name="is_expired" invisible="True"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="todo_task_view_filter" model="ir.ui.view">
+            <field name="name">todo.task.view_filter</field>
+            <field name="model">todo.task</field>
+            <field name="arch" type="xml">
+                <search string="Todo">
+                    <field name="name"/>
+                    <field name="category_id"/>
+                    <field name="priority"/>
+                    <separator/>
+                    <filter string="未完成" name="undone" domain="[('is_done', '=', False)]"/>
+                    <filter string="已完成" name="done" domain="[('is_done', '=', True)]"/>
+                    <separator/>
+                    <filter string="待办" name="todo" domain="[('priority', '=', 'todo')]"/>
+                    <filter string="普通" name="normal" domain="[('priority', '=', 'normal')]"/>
+                    <filter string="紧急" name="urgency" domain="[('priority', '=', 'urgency')]"/>
+                    <group expand="0" string="分组">
+                        <filter name="group_by_name" string="" context="{'group_by': 'name'}"/>
+                        <filter name="group_by_category" string="" context="{'group_by': 'category_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="todo_category_view_tree" model="ir.ui.view">
+            <field name="name">todo.category.view_tree</field>
+            <field name="model">todo.category</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Todo Category" editable="bottom">
+                    <field name="name"/>
+                    <field name="count"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+    <record id="todo_task_view_form" model="ir.ui.view">
+        <field name="name">todo.task.view_form</field>
+        <field name="model">todo.task</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Todo">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="category_id"/>
+                            <field name="is_done"/>
+                        </group>
+                        <group>
+                            <field name="priority"/>
+                            <field name="deadline"/>
+                            <field name="is_expired" readonly="True"/>
+                        </group>
+                        <notebook colspan="4">
+                            <page string="描述">
+                                <field name="name" nolabel="1"/>
+                            </page>
+                            <page string="关于">
+                                这是事项
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
